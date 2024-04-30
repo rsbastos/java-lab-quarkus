@@ -12,12 +12,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 //import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @QuarkusTest
@@ -54,7 +55,7 @@ class CandidateServiceTest {
     }
 
     @Test
-    void findById() {
+    void findById_whenCandidateIsFound_returnsCandidate() {
         Candidate candidate = Instancio.create(Candidate.class);           
 
         when(repository.findById(candidate.id())).thenReturn(Optional.of(candidate));
@@ -65,5 +66,17 @@ class CandidateServiceTest {
         verifyNoMoreInteractions(repository);
 
         assertEquals(candidate, result);
+    }
+
+    @Test
+    void findById_whenCandidateIsNotFound_throwsException() {
+        Candidate candidate = Instancio.create(Candidate.class);
+
+        when(repository.findById(candidate.id())).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class, () -> service.findById(candidate.id()));
+        
+        verify(repository).findById(candidate.id());
+        verifyNoMoreInteractions(repository);
     }
 }
