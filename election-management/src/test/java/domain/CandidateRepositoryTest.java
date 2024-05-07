@@ -15,33 +15,32 @@ public abstract class CandidateRepositoryTest {
 
     @Test
     void save() {
-        Candidate candidate = Instancio.create(Candidate.class);
-        repository().save(candidate);
+        var domain = Instancio.create(Candidate.class);
+        repository().save(domain);
 
-        Optional<Candidate> result = repository().findById(candidate.id());
+        Optional<Candidate> result = repository().findById(domain.id());
 
         assertTrue(result.isPresent());
-        assertEquals(candidate, result.get());
+        assertEquals(domain, result.get());
     }
 
     @Test
     void findAll() {
-        List<Candidate> candidates = Instancio.stream(Candidate.class).limit(10).toList();
+        var candidates = Instancio.stream(Candidate.class).limit(12).toList();
 
         repository().save(candidates);
 
         List<Candidate> result = repository().findAll();
 
-        assertEquals(result.size(), candidates.size());
+        assertEquals(candidates.size(), result.size());
     }
 
     @Test
     void findByName() {
-        Candidate candidate1 = Instancio.create(Candidate.class);
-        Candidate candidate2 = Instancio.of(Candidate.class)
-                .set(field("familyName"), "Bastos").create();
+        var candidate1 = Instancio.create(Candidate.class);
+        var candidate2 = Instancio.of(Candidate.class).set(field("familyName"), "Bastos").create();
 
-        CandidateQuery query = new CandidateQuery.Builder().name("BAS").build();
+        var query = new CandidateQuery.Builder().name("BAS").build();
 
         repository().save(List.of(candidate1, candidate2));
 
@@ -49,8 +48,6 @@ public abstract class CandidateRepositoryTest {
 
         assertEquals(1, result.size());
         assertEquals(candidate2, result.get(0));
-    }
-
-  
+    } 
 
 }

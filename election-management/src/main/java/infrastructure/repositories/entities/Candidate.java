@@ -78,7 +78,7 @@ public class Candidate {
     }
 
     public static Candidate fromDomain(domain.Candidate domain) {
-        Candidate entity = new Candidate();
+        var entity = new Candidate();
 
         entity.setId(domain.id());
         entity.setPhoto(domain.photo().orElse(null));
