@@ -45,7 +45,7 @@ services:
       context: ./voting-app
       # dockerfile: src/main/docker/Dockerfile.native
       dockerfile: src/main/docker/Dockerfile.jvm
-    image: dio/voting-app:${TAG:-1.0.0} 
+    image: dio/voting-app:${TAG:-1.0.1} 
     environment:
       - QUARKUS_REDIS_HOSTS=redis://caching:6379
     labels:
