@@ -1,8 +1,8 @@
 package api.dto.out;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record Candidate(String id,

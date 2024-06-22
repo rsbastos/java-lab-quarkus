@@ -6,8 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CandidateService {
-
-    private final CandidateRepository repository;    
+    private final CandidateRepository repository;
 
     public CandidateService(CandidateRepository repository) {
         this.repository = repository;
@@ -18,10 +17,10 @@ public class CandidateService {
     }
 
     public List<Candidate> findAll() {
-        return repository.findAll();        
+        return repository.findAll();
     }
 
     public Candidate findById(String id) {
-        return repository.findById(id).orElseThrow();        
+        return repository.findById(id).orElseThrow();
     }
 }
