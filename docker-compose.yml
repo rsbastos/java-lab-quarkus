@@ -27,7 +27,7 @@ services:
       context: ./election-management
       # dockerfile: src/main/docker/Dockerfile.native
       dockerfile: src/main/docker/Dockerfile.jvm
-    image: dio/election-management:${TAG:-1.0.4}
+    image: dio/election-management:${TAG:-1.0.0}
     environment:
       - QUARKUS_DATASOURCE_USERNAME=election-management-user
       - QUARKUS_DATASOURCE_PASSWORD=election-management-password
